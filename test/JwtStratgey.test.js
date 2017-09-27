@@ -1,7 +1,7 @@
 'use strict';
 
 const { expect } = require('chai');
-const {assert, AssertionError} = require('assert');
+const {AssertionError} = require('assert');
 const sinon = require('sinon');
 const adal = require('adal-node');
 
@@ -86,6 +86,5 @@ describe('When using the HotConfigApiAdapter with JWT config', () => {
     } catch(e) {
       expect(e).to.be.an.instanceof(AssertionError);
     }
-
   });
 });

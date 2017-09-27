@@ -14,12 +14,21 @@ let token = await jwtStrategy(options).getBearerToken;
 
 ## Options
 
-An exception of AssertionError is thrown if the required config options are not present for the defined strategy
+```
+{
+    url: 'string',
+    auth: {...} // See below
+}
+```
+The presence of a url indicated that a strategy is required, without a url defined null is returned. 
+
+An exception of AssertionError is thrown if the required config options are not present for the defined strategy.
 
 ### Active Directory Strategy
 
 ```
 {
+    url: 'https://some.url',
     auth: {
         type: 'aad',
         tenant: 'string',
@@ -35,6 +44,7 @@ An exception of AssertionError is thrown if the required config options are not 
 
 ```
 {
+    url: 'https://some.url',
     auth: {
         type: 'secret',
         jwt: 'string',

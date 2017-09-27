@@ -1,7 +1,6 @@
 'use strict';
 
 const adal = require('adal-node');
-
 const AuthenticationContext = adal.AuthenticationContext;
 
 const aadStrategy = (config) => {
