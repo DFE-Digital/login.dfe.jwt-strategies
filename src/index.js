@@ -9,6 +9,7 @@ const getJwtStrategy = (config) => {
   }
 
   assert(config.auth.type, 'auth.type configuration attribute required');
+  assert(['aad', 'secret'].includes(config.auth.type ), 'auth.type must be a know type (secret or aad)');
 
   if (config.auth.type === 'secret') {
     assert(config.auth.jwt, 'auth.jwt configuration attribute required');
