@@ -54,6 +54,19 @@ describe('When using the HotConfigApiAdapter with JWT config', () => {
     },
   };
 
+  const brokenAuthTypeConfig = {
+    hotConfig: {
+      url: 'https://loclal.clients',
+      auth: {
+        type: 'aad',
+        authorityHostUrl: 'https://auth.host',
+        clientId: 'some_client_id',
+        clientSecret: 'client_secret',
+        resource: 'some_resource',
+      },
+    },
+  };
+
   beforeEach(() => {
     sandbox = sinon.sandbox.create();
   });
@@ -87,4 +100,12 @@ describe('When using the HotConfigApiAdapter with JWT config', () => {
       expect(e).to.be.an.instanceof(AssertionError);
     }
   });
+
+  it('incompatible auth.type specified', () => {
+    try{
+      jwtStrategy(brokenAuthTypeConfig.hotConfig)
+    } catch(e) {
+      expect(e).to.be.an.instanceof(AssertionError);
+    }
+  })
 });
