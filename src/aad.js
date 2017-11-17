@@ -4,12 +4,20 @@ const adal = require('adal-node');
 const AuthenticationContext = adal.AuthenticationContext;
 
 const aadStrategy = (config) => {
+  const loggingOptions = adal.Logging.getLoggingOptions();
+  if (config.auth.logLevel) {
+    loggingOptions.level = config.auth.logLevel;
+  } else {
+    loggingOptions.level = adal.Logging.LOGGING_LEVEL.INFO;
+  }
+  adal.Logging.setLoggingOptions(loggingOptions);
+
   const {
     tenant,
     authorityHostUrl,
     clientId,
     clientSecret,
-    resource,
+    resource
   } = config.auth;
 
   const authorityUrl = `${authorityHostUrl}/${tenant}`;
@@ -27,7 +35,7 @@ const aadStrategy = (config) => {
       } catch (e) {
         return '';
       }
-    },
+    }
   };
 };
 
