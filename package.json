@@ -18,16 +18,16 @@
   "homepage": "https://github.com/DFE-Digital/login.dfe.jwt-strategies#readme",
   "devDependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.4.1",
+    "eslint": "^4.11.0",
     "eslint-config-airbnb-base": "^11.3.1",
-    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-import": "^2.8.0",
     "gulp": "^3.9.0",
     "gulp-zip": "^3.0.2",
     "mocha": "^3.5.3",
-    "sinon": "^3.2.1",
-    "proxyquire": "^1.8.0"
+    "proxyquire": "^1.8.0",
+    "sinon": "^3.2.1"
   },
   "dependencies": {
-    "adal-node": "^0.1.22"
+    "adal-node": "^0.1.25"
   }
 }
