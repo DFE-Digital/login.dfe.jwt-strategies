@@ -1,6 +1,7 @@
 'use strict';
 
 const adal = require('adal-node');
+
 const AuthenticationContext = adal.AuthenticationContext;
 
 const aadStrategy = (config) => {
@@ -17,7 +18,7 @@ const aadStrategy = (config) => {
     authorityHostUrl,
     clientId,
     clientSecret,
-    resource
+    resource,
   } = config.auth;
 
   const authorityUrl = `${authorityHostUrl}/${tenant}`;
@@ -35,7 +36,7 @@ const aadStrategy = (config) => {
       } catch (e) {
         return '';
       }
-    }
+    },
   };
 };
 
