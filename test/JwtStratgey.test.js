@@ -1,13 +1,14 @@
 'use strict';
 
 jest.mock('adal-node', () => {
-  const AuthenticationContext = jest.fn().mockImplementation(() =>  {
-    return {
-      acquireTokenWithClientCredentials: () => new Promise((resolveNew) => resolveNew(
-        {accessToken: 'foo'})),
-    }});
   return {
-    AuthenticationContext: jest.fn().mockImplementation(AuthenticationContext),
+    AuthenticationContext: jest.fn().mockImplementation(() => {
+      return {
+        acquireTokenWithClientCredentials: jest.fn().mockImplementation((a, b, c, done) => {
+          done(null, { accessToken: 'foo' });
+        }),
+      };
+    }),
     Logging: {
       getLoggingOptions: jest.fn().mockImplementation(() => ({ level: '' })),
       setLoggingOptions: jest.fn(),
@@ -91,10 +92,6 @@ describe('When using the HotConfigApiAdapter with JWT config', () => {
 
   it('use the Active Directory jwt strategy', async () => {
     const strategy = jwtStrategy(jwtConfig.hotConfig);
-    adal.AuthenticationContext.mockReset();
-    adal.AuthenticationContext.mockImplementation(() => ({
-      acquireTokenWithClientCredentials: () => ({ accessToken: 'foo' }),
-    }));
 
     const response = await strategy.getBearerToken();
 
