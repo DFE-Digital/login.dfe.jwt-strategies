@@ -51,3 +51,20 @@ An exception of AssertionError is thrown if the required config options are not 
     }
 }
 ```
+
+## Caching
+
+Caching is enabled by default and will be used with the AAD strategy. By default, tokens are cached in memory.
+
+to disable caching, set cache to null:
+```
+jwtStrategy.cache = null;
+```
+
+to use a custom cache, provide an implementation as per below:
+```
+jwtStrategy.cache = {
+    get: async (key) => { /*Get value for key from cache*/ },
+    set: async (key, value, timeout = 0) => { /*Add value to cache with key and optionally timeout*/ },
+}
+```
