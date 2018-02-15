@@ -1,6 +1,7 @@
 const assert = require('assert');
 const secretStrategy = require('./secret');
 const aadStrategy = require('./aad');
+const cacheAdapter = require('./memoryCacheAdapter');
 
 const getJwtStrategy = (config) => {
   const requiresJwt = config.url !== undefined;
@@ -23,9 +24,11 @@ const getJwtStrategy = (config) => {
     assert(config.auth.clientSecret, 'auth.clientSecret configuration attribute required');
     assert(config.auth.resource, 'auth.resource configuration attribute required');
 
-    return aadStrategy(config);
+    return aadStrategy(config, getJwtStrategy.cache);
   }
   return null;
 };
+
+getJwtStrategy.cache = cacheAdapter;
 
 module.exports = getJwtStrategy;
