@@ -1,7 +1,8 @@
 const cache = require('memory-cache');
 
 const get = async (key) => {
-  return cache.get(key);
+  const value = cache.get(key);
+  return value ? JSON.parse(value) : null;
 };
 
 const set = async (key, value, timeout = 0) => {
