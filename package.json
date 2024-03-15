@@ -26,7 +26,6 @@
     "jest-cli": "^29.6.2"
   },
   "dependencies": {
-    "adal-node": "^0.2.3",
-    "memory-cache": "^0.2.0"
+    "@azure/msal-node": "^2.6.4"
   }
 }
