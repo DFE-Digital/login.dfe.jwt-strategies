@@ -1,0 +1,36 @@
+name: $(BuildDefinitionName)_tag-$(BuildID)_at-$(Date:yyyyMMdd)$(Rev:.r)
+resources:
+  repositories:
+  # Defult branch is master
+    - repository: devopsTemplates
+      type: github
+      endpoint: DfE-Digital
+      name: DFE-Digital/login.dfe.devops
+      ref: main
+
+trigger:
+  branches:
+    include:
+    - feature/*
+
+pr:
+  branches:
+    include:
+    - main
+
+variables:
+- group: dsi-global
+
+
+stages:
+
+# Code Scans & Build the artifact for deployment
+- stage: scanBuildApp
+  displayName: "Scan tools & Build"
+  jobs:
+    # Code scaning tools
+  - template:  pipeline/eslint.yml@devopsTemplates
+
+  - template:  pipeline/dependencyCheck.yml@devopsTemplates
+    parameters:
+      npmInstCmd: 'install --force --json --no-package-lock'
