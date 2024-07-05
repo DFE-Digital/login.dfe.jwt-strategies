@@ -24,13 +24,12 @@ variables:
 
 stages:
 
-# Code Scans & Build the artifact for deployment
-- stage: scanBuildApp
-  displayName: "Scan tools & Build"
+# Code Scans
+- stage: Codescan
+  displayName: "Scan tools"
   jobs:
-    # Code scaning tools
-  - template:  pipeline/eslint.yml@devopsTemplates
 
-  - template:  pipeline/dependencyCheck.yml@devopsTemplates
+  - template:  pipeline/scanTools.yml@devopsTemplates
     parameters:
       npmInstCmd: 'install --force --json --no-package-lock'
+      AppDeploy: true
