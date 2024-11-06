@@ -1,9 +1,7 @@
-jest.mock('@azure/msal-node', () => {
-  return {
-    ...jest.requireActual('@azure/msal-node'),
-    ConfidentialClientApplication: jest.fn(),
-  };
-});
+jest.mock('@azure/msal-node', () => ({
+  ...jest.requireActual('@azure/msal-node'),
+  ConfidentialClientApplication: jest.fn(),
+}));
 
 const msal = require('@azure/msal-node');
 const createConfidentialClientApplication = require('../../src/aad/createConfidentialClientApplication');
@@ -23,7 +21,7 @@ describe('createConfidentialClientApplication(auth)', () => {
     createConfidentialClientApplication(fakeAuth);
 
     const actualConstructorParams = msal.ConfidentialClientApplication.mock.calls[0];
-    const [ actualMsalConfig ] = actualConstructorParams;
+    const [actualMsalConfig] = actualConstructorParams;
 
     expect(actualMsalConfig.auth).toMatchObject({
       clientId: 'client-id-1',
@@ -36,7 +34,7 @@ describe('createConfidentialClientApplication(auth)', () => {
     createConfidentialClientApplication(fakeAuth);
 
     const actualConstructorParams = msal.ConfidentialClientApplication.mock.calls[0];
-    const [ actualMsalConfig ] = actualConstructorParams;
+    const [actualMsalConfig] = actualConstructorParams;
 
     expect(actualMsalConfig.system.loggerOptions.piiLoggingEnabled).toBe(false);
   });
@@ -45,9 +43,9 @@ describe('createConfidentialClientApplication(auth)', () => {
     createConfidentialClientApplication(fakeAuth);
 
     const actualConstructorParams = msal.ConfidentialClientApplication.mock.calls[0];
-    const [ actualMsalConfig ] = actualConstructorParams;
+    const [actualMsalConfig] = actualConstructorParams;
 
-    expect(actualMsalConfig.system.loggerOptions.logLevel).toBe(msal.LogLevel.Info);
+    expect(actualMsalConfig.system.loggerOptions.logLevel).toBe(msal.LogLevel.Error);
   });
 
   it('logs messages to the console', () => {
@@ -56,12 +54,12 @@ describe('createConfidentialClientApplication(auth)', () => {
     createConfidentialClientApplication(fakeAuth);
 
     const actualConstructorParams = msal.ConfidentialClientApplication.mock.calls[0];
-    const [ actualMsalConfig ] = actualConstructorParams;
-    actualMsalConfig.system.loggerOptions.loggerCallback(msal.LogLevel.Info, "Test123", false);
+    const [actualMsalConfig] = actualConstructorParams;
+    actualMsalConfig.system.loggerOptions.loggerCallback(msal.LogLevel.Error, 'Test123', false);
 
     const actualConsoleLogParams = spy.mock.calls[0];
-    const [ actualConsoleLogMessage ] = actualConsoleLogParams;
+    const [actualConsoleLogMessage] = actualConsoleLogParams;
 
-    expect(actualConsoleLogMessage).toContain("Test123");
+    expect(actualConsoleLogMessage).toContain('Test123');
   });
 });

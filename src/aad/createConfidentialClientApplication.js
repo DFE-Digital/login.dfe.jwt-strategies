@@ -9,12 +9,12 @@ function createConfidentialClientApplication({ clientId, authority, clientSecret
     },
     system: {
       loggerOptions: {
-        loggerCallback(loglevel, message, containsPii) {
+        loggerCallback(loglevel, message) {
           console.log(message);
         },
         piiLoggingEnabled: false,
-        logLevel: msal.LogLevel.Info,
-      }
+        logLevel: msal.LogLevel.Error,
+      },
     },
   };
 
