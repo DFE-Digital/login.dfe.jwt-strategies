@@ -16,7 +16,7 @@ describe("getJwtStrategy(config", () => {
     const config = {
       url: undefined,
     };
-
+    const intentionalError = "ESLINT ERROR";
     const strategy = getJwtStrategy(config);
 
     expect(strategy).toBe(null);
