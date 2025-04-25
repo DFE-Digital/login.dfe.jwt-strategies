@@ -28,7 +28,7 @@
   "homepage": "https://github.com/DFE-Digital/login.dfe.jwt-strategies#readme",
   "devDependencies": {
     "@eslint/js": "^9.25.1",
-    "chai": "^4.3.6",
+    "chai": "^4.5.0",
     "eslint": "^9.25.1",
     "eslint-formatter-junit": "^8.40.0",
     "eslint-plugin-jest": "^28.11.0",
@@ -41,6 +41,6 @@
     "prettier": "^3.5.3"
   },
   "dependencies": {
-    "@azure/msal-node": "^2.6.4"
+    "@azure/msal-node": "^2.16.2"
   }
 }
