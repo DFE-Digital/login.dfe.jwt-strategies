@@ -1,4 +1,4 @@
-const secretStrategy = config => ({
+const secretStrategy = (config) => ({
   async getBearerToken() {
     return config.auth.jwt;
   },

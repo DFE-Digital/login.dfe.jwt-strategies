@@ -1,4 +1,4 @@
-const getConfidentialClientApplication = require('./getConfidentialClientApplication');
+const getConfidentialClientApplication = require("./getConfidentialClientApplication");
 
 const aadStrategy = (config) => {
   const cca = getConfidentialClientApplication({
@@ -10,12 +10,11 @@ const aadStrategy = (config) => {
     async getBearerToken() {
       try {
         const response = await cca.acquireTokenByClientCredential({
-          scopes: [ `${config.auth.resource}/.default` ],
+          scopes: [`${config.auth.resource}/.default`],
         });
         return response.accessToken;
-      }
-      catch (e) {
-        return '';
+      } catch (e) {
+        return "";
       }
     },
   };

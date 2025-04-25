@@ -2,7 +2,7 @@
 
 This package provides various jwt strategies to login.dfe components.
 
-## Usage  
+## Usage
 
 ```
 let jwtStrategy = require('login.dfe.jwt-strategies');
@@ -20,7 +20,8 @@ let token = await jwtStrategy(options).getBearerToken;
     auth: {...} // See below
 }
 ```
-The presence of a url indicated that a strategy is required, without a url defined null is returned. 
+
+The presence of a url indicated that a strategy is required, without a url defined null is returned.
 
 An exception of AssertionError is thrown if the required config options are not present for the defined strategy.
 
@@ -40,7 +41,7 @@ An exception of AssertionError is thrown if the required config options are not 
 }
 ```
 
-### Simple Jwt Strategy 
+### Simple Jwt Strategy
 
 ```
 {
@@ -57,11 +58,13 @@ An exception of AssertionError is thrown if the required config options are not 
 Caching is enabled by default and will be used with the AAD strategy. By default, tokens are cached in memory.
 
 to disable caching, set cache to null:
+
 ```
 jwtStrategy.cache = null;
 ```
 
 to use a custom cache, provide an implementation as per below:
+
 ```
 jwtStrategy.cache = {
     get: async (key) => { /*Get value for key from cache*/ },

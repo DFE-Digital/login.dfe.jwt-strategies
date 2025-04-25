@@ -1,32 +1,32 @@
-jest.mock('../src/secret', () => jest.fn());
-jest.mock('../src/aad', () => jest.fn());
+jest.mock("../src/secret", () => jest.fn());
+jest.mock("../src/aad", () => jest.fn());
 
-const { AssertionError } = require('assert');
-const msal = require('@azure/msal-node');
-const getJwtStrategy = require('../src');
-const secretStrategy = require('../src/secret');
-const aadStrategy = require('../src/aad');
+const { AssertionError } = require("assert");
+const msal = require("@azure/msal-node");
+const getJwtStrategy = require("../src");
+const secretStrategy = require("../src/secret");
+const aadStrategy = require("../src/aad");
 
-describe('getJwtStrategy(config', () => {
+describe("getJwtStrategy(config", () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
 
-  it('returns `null` when does not use a jwt strategy', () => {
+  it("returns `null` when does not use a jwt strategy", () => {
     const config = {
       url: undefined,
     };
 
     const strategy = getJwtStrategy(config);
-  
+
     expect(strategy).toBe(null);
   });
 
-  it('throws assertion error if required an unsupported auth type is specified', () => {
+  it("throws assertion error if required an unsupported auth type is specified", () => {
     const config = {
-      url: 'https://loclal.clients',
+      url: "https://loclal.clients",
       auth: {
-        type: 'non-existent-type',
+        type: "non-existent-type",
       },
     };
 
@@ -39,10 +39,10 @@ describe('getJwtStrategy(config', () => {
 
   it('resolves `secret` strategy when auth type is "secret"', () => {
     const config = {
-      url: 'https://loclal.clients',
+      url: "https://loclal.clients",
       auth: {
-        type: 'secret',
-        jwt: 'secret-token',
+        type: "secret",
+        jwt: "secret-token",
       },
     };
 
@@ -56,14 +56,14 @@ describe('getJwtStrategy(config', () => {
 
   it('resolves `aad` strategy when auth type is "aad"', () => {
     const config = {
-      url: 'https://loclal.clients',
+      url: "https://loclal.clients",
       auth: {
-        type: 'aad',
-        tenant: 'some_tenant',
-        authorityHostUrl: 'https://auth.host',
-        clientId: 'some_client_id',
-        clientSecret: 'client_secret',
-        resource: 'some_resource',
+        type: "aad",
+        tenant: "some_tenant",
+        authorityHostUrl: "https://auth.host",
+        clientId: "some_client_id",
+        clientSecret: "client_secret",
+        resource: "some_resource",
         logLevel: msal.LogLevel.Info,
       },
     };
@@ -77,30 +77,33 @@ describe('getJwtStrategy(config', () => {
   });
 
   it.each([
-    [ 'tenant' ],
-    [ 'authorityHostUrl' ],
-    [ 'clientId' ],
-    [ 'clientSecret' ],
-    [ 'resource' ],
-  ])('throws assertion error if required `aad` configuration `%s` is not present', (missingConfigKey) => {
-    const config = {
-      url: 'https://loclal.clients',
-      auth: {
-        type: 'aad',
-        tenant: 'some_tenant',
-        authorityHostUrl: 'https://auth.host',
-        clientId: 'some_client_id',
-        clientSecret: 'client_secret',
-        resource: 'some_resource',
-        logLevel: msal.LogLevel.Info,
-      },
-    };
-    delete config.auth[missingConfigKey];
+    ["tenant"],
+    ["authorityHostUrl"],
+    ["clientId"],
+    ["clientSecret"],
+    ["resource"],
+  ])(
+    "throws assertion error if required `aad` configuration `%s` is not present",
+    (missingConfigKey) => {
+      const config = {
+        url: "https://loclal.clients",
+        auth: {
+          type: "aad",
+          tenant: "some_tenant",
+          authorityHostUrl: "https://auth.host",
+          clientId: "some_client_id",
+          clientSecret: "client_secret",
+          resource: "some_resource",
+          logLevel: msal.LogLevel.Info,
+        },
+      };
+      delete config.auth[missingConfigKey];
 
-    const act = () => {
-      getJwtStrategy(config);
-    };
+      const act = () => {
+        getJwtStrategy(config);
+      };
 
-    expect(act).toThrow(AssertionError);
-  });
+      expect(act).toThrow(AssertionError);
+    },
+  );
 });

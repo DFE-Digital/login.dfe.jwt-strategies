@@ -1,4 +1,4 @@
-const createConfidentialClientApplication = require('./createConfidentialClientApplication');
+const createConfidentialClientApplication = require("./createConfidentialClientApplication");
 
 const ccaCache = new Map();
 
