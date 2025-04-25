@@ -57,6 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 eslint-results.xml
+junit.xml
 .idea
 
 

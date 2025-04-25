@@ -10,6 +10,7 @@
     "lint:report": "eslint . -f junit -o eslint-results.xml",
     "format": "prettier . --write",
     "test": "./node_modules/.bin/jest",
+    "test:report": "jest --coverage --reporters=default --reporters jest-junit --coverageReporters=clover",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -35,6 +36,7 @@
     "husky": "^9.1.7",
     "jest": "^29.6.2",
     "jest-cli": "^29.6.2",
+    "jest-junit": "^16.0.0",
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3"
   },
