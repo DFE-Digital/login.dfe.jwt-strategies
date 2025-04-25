@@ -13,7 +13,7 @@ const aadStrategy = (config) => {
           scopes: [`${config.auth.resource}/.default`],
         });
         return response.accessToken;
-      } catch (e) {
+      } catch {
         return "";
       }
     },
