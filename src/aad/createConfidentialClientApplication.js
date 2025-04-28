@@ -1,6 +1,10 @@
-const msal = require('@azure/msal-node');
+const msal = require("@azure/msal-node");
 
-function createConfidentialClientApplication({ clientId, authority, clientSecret }) {
+function createConfidentialClientApplication({
+  clientId,
+  authority,
+  clientSecret,
+}) {
   const msalConfig = {
     auth: {
       clientId,
